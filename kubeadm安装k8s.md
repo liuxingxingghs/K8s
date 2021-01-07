@@ -4,7 +4,7 @@
 >
 > `GitHub`：https://github.com/kubernetes/kubeadm
 >
-> `课程中`：使用kubeadm搭建一个3台机器组成的k8s集群，1台master节点，2台worker节点
+> 使用kubeadm搭建一个3台机器组成的k8s集群，1台master节点，2台worker节点
 >
 > **如果大家机器配置不够，也可以使用在线的，或者minikube的方式或者1个master和1个worker**
 >
@@ -13,7 +13,7 @@
 > - One or more machines running one of:
 >   - Ubuntu 16.04+
 >   - Debian 9+
->   - CentOS 7【课程中使用】
+>   - CentOS 7
 >   - Red Hat Enterprise Linux (RHEL) 7
 >   - Fedora 25+
 >   - HypriotOS v1.0.1+
@@ -47,7 +47,7 @@ calico:v3.9
 
 ### 1.2 准备3台centos
 
-大家根据自己的情况来准备centos7的虚拟机。
+准备centos7的虚拟机。
 
 要保证彼此之间能够ping通，也就是处于同一个网络中，虚拟机的配置要求上面也描述咯。
 
@@ -62,35 +62,33 @@ yum install -y conntrack ipvsadm ipset jq sysstat curl iptables libseccomp
 
 ### 1.4 安装Docker
 
-> 根据之前学习的Docker方式[Docker第一节课的笔记中也有这块的说明]
->
 > 在每一台机器上都安装好Docker，版本为18.09.0
 >
 > ```shell
-> 01 安装必要的依赖
+>01 安装必要的依赖
 > 	sudo yum install -y yum-utils \
->     device-mapper-persistent-data \
->     lvm2
->     
->     
-> 02 设置docker仓库
-> 	sudo yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
-> 	
+>  device-mapper-persistent-data \
+>  lvm2
+>    
+>    
+>     02 设置docker仓库
+>     	sudo yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
+> 
 > 【设置要设置一下阿里云镜像加速器】
-> sudo mkdir -p /etc/docker
+> 	sudo mkdir -p /etc/docker
 > sudo tee /etc/docker/daemon.json <<-'EOF'
 > {
->   "registry-mirrors": ["这边替换成自己的实际地址"]
+> "registry-mirrors": ["这边替换成自己的实际地址"]
 > }
-> EOF
+>   EOF
 > sudo systemctl daemon-reload
 > 
 > 
 > 03 安装docker
 > 
->   yum install -y docker-ce-18.09.0 docker-ce-cli-18.09.0 containerd.io
+> yum install -y docker-ce-18.09.0 docker-ce-cli-18.09.0 containerd.io
 > 
-> 
+>   
 > 04 启动docker
 > 	sudo systemctl start docker && sudo systemctl enable docker
 > ```
